@@ -1,13 +1,17 @@
 <?php
+//tests index file
 include_once("../autoload.php");
 //set up classes to test
 $classesToCheck = array(
 	"DatabaseTest",
 	"userTest",
 	"personTest",
-	//"meetingType",
-	//"assignmentType",
-	//"meeting",
+	"configFileTest",
+	//"meetingTypeTest",
+	//"meetingTest",
+	//"assignmentTypeTest",
+	//"assignmentTest",
+	//"assignmentDetailsTest",
 );
 
 function startWithTest($haystack)

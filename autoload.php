@@ -10,7 +10,7 @@
 			
 		$direction = "";
 		
-		if(basename(dirname($_SERVER['PHP_SELF'])) == "tests"){
+		if(basename(dirname($_SERVER['PHP_SELF'])) == "tests" || basename(dirname($_SERVER['PHP_SELF'])) == "setup"){
 			$direction = "../";
 		}
 		

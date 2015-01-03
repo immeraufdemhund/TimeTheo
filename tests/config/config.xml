@@ -1,0 +1,7 @@
+<xml>
+	<dbHost>localhost</dbHost>
+	<dbName>timetheo</dbName>
+	<dbUser>timetheo</dbUser>
+	<dbPass>timetheo</dbPass>
+	<theme></theme>
+</xml>

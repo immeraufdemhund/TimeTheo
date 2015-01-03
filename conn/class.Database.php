@@ -1,32 +1,29 @@
 <?php
+
 class Database {
-    var $host;    //Hostname, Server
-    var $password;  //Passwort MySQL
-    var $user;   //User MySQL
-    var $database;  //Datenbankname MySQL
+
     var $link;
     var $query;
     var $result;
     var $rows;
+    var $config;
 
     function Database() {
-        $this->host = "localhost";                  //          <<---------
-        $this->password = "timetheo";           //          <<---------
-        $this->user = "timetheo";                   //          <<---------
-        $this->database = "timetheo";           //          <<---------
+        $this->config = new configFile();
+        $this->config->Load("config/config.xml");
         $this->rows = 0;
     }
 
     function OpenLink() {
-        if(!$this->link = @mysql_connect($this->host, $this->user, $this->password)){
-			throw new exception("Class Database: Error while connecting to DB (link)");
-		}
+        if (!$this->link = @mysql_connect($this->config->getHost(), $this->config->getUser(), $this->config->getPassword())) {
+            throw new exception("Class Database: Error while connecting to DB (link)");
+        }
     }
 
     function SelectDB() {
-        if(!@mysql_select_db($this->database, $this->link)){
-			throw new exception("Class Database: Error while selecting DB");
-		}
+        if (!@mysql_select_db($this->config->getDatabaseName(), $this->link)) {
+            throw new exception("Class Database: Error while selecting DB");
+        }
     }
 
     function CloseDB() {
@@ -37,9 +34,9 @@ class Database {
         $this->OpenLink();
         $this->SelectDB();
         $this->query = $query;
-        if(!$this->result = mysql_query($query, $this->link)){
-			throw new exception("Class Database: Error while executing Query");
-		}
+        if (!$this->result = mysql_query($query, $this->link)) {
+            throw new exception("Class Database: Error while executing Query");
+        }
         if (ereg("SELECT", $query)) {
             $this->rows = mysql_num_rows($this->result);
         }
