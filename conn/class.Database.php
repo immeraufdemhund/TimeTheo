@@ -13,6 +13,10 @@ class Database {
         $this->config->Load("config/config.xml");
         $this->rows = 0;
     }
+    
+    function setConfig(configFile $config){
+        $this->config = $config;
+    }
 
     function OpenLink() {
         if (!$this->link = @mysql_connect($this->config->getHost(), $this->config->getUser(), $this->config->getPassword())) {

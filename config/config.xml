@@ -1,7 +1,8 @@
+<?xml version="1.0"?>
 <xml>
 	<dbHost>localhost</dbHost>
 	<dbName>timetheo</dbName>
 	<dbUser>timetheo</dbUser>
 	<dbPass>timetheo</dbPass>
-	<theme></theme>
+	<theme>classic</theme>
 </xml>

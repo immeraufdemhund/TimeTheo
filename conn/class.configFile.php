@@ -8,6 +8,8 @@ class configFile {
     var $user;
     var $pass;
     var $theme;
+    var $beta = "";
+    var $disabled = false;
 
     function configFile() {
         $this->doc = false;
@@ -58,9 +60,38 @@ class configFile {
         $this->theme = $theme;
     }
 
+    function getBeta() {
+        return $this->beta;
+    }
+
+    function setBeta($var) {
+        $this->beta = $var;
+    }
+
+    function getDisabled() {
+        if ($this->disabled) {
+            return 'disabled="true"';
+        }
+        return "";
+    }
+
+    function setDisabled($var) {
+        $this->disabled = $var;
+    }
+
+    function isDisabled() {
+        return $this->disabled;
+    }
+
     function Load($uri) {
         if (!file_exists($uri)) {
-            throw new exception("Config file not found at provided address: $uri");
+            $uri = "../" . $uri;
+            if (!file_exists($uri)) {
+                $uri = "../" . $uri;
+                if (!file_exists($uri)) {
+                    throw new exception("Config file not found at provided address: $uri");
+                }
+            }
         }
         $this->doc = new DOMDocument();
         $this->doc->load($uri);
@@ -79,6 +110,10 @@ class configFile {
         $this->doc->getElementsByTagName("dbName")->item(0)->nodeValue = $this->db;
         $this->doc->getElementsByTagName("theme")->item(0)->nodeValue = $this->theme;
         $this->doc->save($uri);
+    }
+
+    public function __toString() {
+        return sprintf("Host[$this->host]-Database[$this->db]-User[$this->user]-Pass[$this->pass]");
     }
 
 }

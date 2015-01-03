@@ -1,4 +1,5 @@
 <?php
+
 class person {
 
     var $ID;   // KEY ATTR. WITH AUTOINCREMENT
@@ -9,7 +10,7 @@ class person {
     function person() {
         $this->database = new Database();
     }
-	
+
     function getID() {
         return $this->ID;
     }
@@ -74,10 +75,11 @@ class person {
         $sql = " UPDATE person SET  Name = '$this->Name',Active = '$this->Active' WHERE ID = $id ";
         return $this->database->query($sql);
     }
-	
-	public function __toString(){
-		return sprintf("Person[%d]:'%s' (Active:%s)", $this->ID, $this->Name, $this->Active);
-	}
+
+    public function __toString() {
+        return sprintf("Person[%d]:'%s' (Active:%s)", $this->ID, $this->Name, $this->Active);
+    }
+
 }
 
 ?>

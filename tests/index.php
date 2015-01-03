@@ -91,3 +91,4 @@ class testMethod{
     
 }
 ?>
+<a href="/"><div style="display: inline-block; width: 100px; height: 20px; border-radius: 5px; border: black thin solid; background-color:green; margin:5px; padding:5px;"><strong>Home</strong></div></a>
