@@ -47,7 +47,10 @@ class meeting {
 // **********************
     function select($id) {
         $sql = "SELECT * FROM meeting WHERE ID = $id;";
-        $this->database->query($sql);        $row = $this->database->getResultObject();
+        $success = $this->database->query($sql);
+        $result = $this->database->result;
+        $row = mysql_fetch_object($result);
+
         $this->ID = $row->ID;
         $this->meetingTypeId = $row->meetingTypeId;
         $this->weekNumber = $row->weekNumber;
@@ -59,7 +62,7 @@ class meeting {
 // **********************
     function delete($id) {
         $sql = "DELETE FROM meeting WHERE ID = $id;";
-        $this->database->query($sql);
+        return $this->database->query($sql);
     }
 
 // **********************
@@ -69,9 +72,9 @@ class meeting {
         $this->ID = ""; // clear key for autoincrement
 
         $sql = "INSERT INTO meeting ( meetingTypeId,weekNumber,year ) VALUES ( '$this->meetingTypeId','$this->weekNumber','$this->year' )";
-        $this->database->query($sql);
-        $this->ID = $this->database->getInsertedId();
-        
+        $result = $this->database->query($sql);
+        $this->ID = mysql_insert_id($this->database->link);
+        return $result;
     }
 
 // **********************
@@ -79,7 +82,7 @@ class meeting {
 // **********************
     function update($id) {
         $sql = "UPDATE meeting SET  meetingTypeId = '$this->meetingTypeId',weekNumber = '$this->weekNumber',year = '$this->year' WHERE ID = $id ";
-        $this->database->query($sql);
+        return $this->database->query($sql);
     }
 
 }

@@ -28,7 +28,10 @@ class assignmentDetails {
 // **********************
     function select($assignmentID) {
         $sql = "SELECT * FROM assignmentdetails WHERE assignmentID = $assignmentID;";
-        $this->database->query($sql);        $row = $this->database->getResultObject();
+        $success = $this->database->query($sql);
+        $result = $this->database->result;
+        $row = mysql_fetch_object($result);
+
         $this->assignmentID = $row->assignmentID;
         $this->details = $row->details;
     }
@@ -38,7 +41,7 @@ class assignmentDetails {
 // **********************
     function delete($assignmentID) {
         $sql = "DELETE FROM assignmentdetails WHERE assignmentID = $assignmentID;";
-        $this->database->query($sql);
+        $result = $this->database->query($sql);
     }
 
 // **********************
@@ -46,8 +49,8 @@ class assignmentDetails {
 // **********************
     function insert() {
         $sql = "INSERT INTO assignmentdetails ( assignmentID,details ) VALUES ( '$this->assignmentID','$this->details' )";
-        $this->database->query($sql);
-        $this->ID = $this->database->getInsertedId();
+        $result = $this->database->query($sql);
+        $this->ID = mysql_insert_id($this->database->link);
     }
 
 // **********************
@@ -55,7 +58,7 @@ class assignmentDetails {
 // **********************
     function update($assignmentID) {
         $sql = " UPDATE assignmentdetails SET  assignmentID = '$this->assignmentID',details = '$this->details' WHERE assignmentID = $assignmentID ";
-        $this->database->query($sql);
+        $result = $this->database->query($sql);
     }
 }
 ?>
