@@ -1,5 +1,5 @@
 <?php
-class assignmentTypeTest extends assignmentType {
+class assignmentTypeTest{
 
 }
 ?>

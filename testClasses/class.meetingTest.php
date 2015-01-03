@@ -1,5 +1,5 @@
 <?php
-class meetingTest extends meeting {
+class meetingTest {
     
 
 }

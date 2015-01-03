@@ -1,5 +1,5 @@
 <?PHP
-class assignmentDetailsTest extends assignmentDetails{
+class assignmentDetailsTest{
 
 
 }
