@@ -17,21 +17,45 @@ class configFile {
         $this->pass = false;
         $this->theme = false;
     }
-    
-    function getHost(){
+
+    function getHost() {
         return $this->host;
     }
-    function getDatabaseName(){
+
+    function getDatabaseName() {
         return $this->db;
     }
-    function getUser(){
+
+    function getUser() {
         return $this->user;
     }
-    function getPassword(){
+
+    function getPassword() {
         return $this->pass;
     }
-    function getTheme(){
+
+    function getTheme() {
         return $this->theme;
+    }
+
+    function setHost($host) {
+        $this->host = $host;
+    }
+
+    function setDatabase($db) {
+        $this->db = $db;
+    }
+
+    function setUser($user) {
+        $this->user = $user;
+    }
+
+    function setPassword($pass) {
+        $this->pass = $pass;
+    }
+
+    function setTheme($theme) {
+        $this->theme = $theme;
     }
 
     function Load($uri) {
@@ -40,18 +64,23 @@ class configFile {
         }
         $this->doc = new DOMDocument();
         $this->doc->load($uri);
-        $rootElement = $this->getFirstElement($this->doc, "xml");
-        $this->host = $this->getFirstElement($rootElement,"dbHost")->nodeValue;
-        $this->user = $this->getFirstElement($rootElement,"dbUser")->nodeValue;
-        $this->pass = $this->getFirstElement($rootElement,"dbPass")->nodeValue;
-        $this->db = $this->getFirstElement($rootElement,"dbName")->nodeValue;
-        $this->theme = $this->getFirstElement($rootElement,"theme")->nodeValue;
+        $this->host = $this->doc->getElementsByTagName("dbHost")->item(0)->nodeValue;
+        $this->user = $this->doc->getElementsByTagName("dbUser")->item(0)->nodeValue;
+        $this->pass = $this->doc->getElementsByTagName("dbPass")->item(0)->nodeValue;
+        $this->db = $this->doc->getElementsByTagName("dbName")->item(0)->nodeValue;
+        $this->theme = $this->doc->getElementsByTagName("theme")->item(0)->nodeValue;
     }
-    
-    public static function getFirstElement($node, $elementName){
-        $element = $node->getElementsByTagName($elementName);
-        return $element->item(0);
+
+    function Save($uri) {
+        $this->doc->getElementsByTagName("dbUser")->item(0)->nodeValue = $this->user;
+        $this->doc->getElementsByTagName("dbHost")->item(0)->nodeValue = $this->host;
+        $this->doc->getElementsByTagName("dbPass")->item(0)->nodeValue = $this->pass;
+        $this->doc->getElementsByTagName("dbName")->item(0)->nodeValue = $this->db;
+        $this->doc->getElementsByTagName("dbName")->item(0)->nodeValue = $this->db;
+        $this->doc->getElementsByTagName("theme")->item(0)->nodeValue = $this->theme;
+        $this->doc->save($uri);
     }
+
 }
 
 ?>
