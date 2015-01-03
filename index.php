@@ -18,19 +18,57 @@ function getSessionVar($varName) {
     if (isSessionVar($varName)) {
         return $_SESSION[$varName];
     }
+    return "";
+}
+
+function isPostVar($varName) {
+    if (strlen(filter_input(INPUT_POST, $varName)) > 0) {
+        return true;
+    }
     return false;
+}
+
+function getPostVar($varName) {
+    if (isPostVar($varName)) {
+        return filter_input(INPUT_POST, $varName);
+    }
+    return "";
+}
+
+function isGetVar($varName) {
+    if (strlen(filter_input(INPUT_GET, $varName)) > 0) {
+        return true;
+    }
+    return false;
+}
+
+function getGetVar($varName) {
+    if (isGetVar($varName)) {
+        return filter_input(INPUT_GET, $varName);
+    }
+    return "";
 }
 
 //page flow logic
 
-if(isSessionVar('Logout')){
+if(isGetVar('logout')){
     //logout logic
     session_destroy();
     header("Location: /");
     die();
 }
 
-
+if(isGetVar('login') && isPostVar('username') && isPostVar('pass')){
+    //Login logic
+    $user->setUserName(getPostVar('username'));
+    $user->setPassword(getPostVar('pass'));
+    $valid = $user->tryLogin();
+    if($valid !== false){
+        $_SESSION['UserId'] = $valid;
+        header("Location: /");
+        die();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -52,8 +90,8 @@ if(isSessionVar('Logout')){
         <form action="/?login=true" method="post">
             <?php
             $login = new userLogin();
-            if(strlen(filter_input(INPUT_POST, 'username')) > 0){
-                $login->setPrevious(filter_input(INPUT_POST, 'username'));
+            if(isPostVar('username')){
+                $login->setPrevious(getPostVar('username'));
             }
             Template::load($config, $login);
             ?>

@@ -59,6 +59,8 @@ class user {
         $this->UserName = $row->UserName;
         $this->Password = $row->Password;
         $this->PersonID = $row->PersonID;
+        $this->Person = new person();
+        $this->Person->select($this->PersonID);
     }
 
 // **********************
@@ -100,12 +102,13 @@ class user {
         $success = $this->database->query($sql);
         $result = $this->database->result;
         $row = mysql_fetch_object($result);
-
-        if ($this->Password == $row->Password) {
-            $this->select($row->ID);
-            $this->Person = new person();
-            $this->Person->select($this->PersonID);
-            return $this->ID;
+        if ($this->database->rows > 0) {
+            if ($this->Password == $row->Password) {
+                $this->select($row->ID);
+                return $this->ID;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
