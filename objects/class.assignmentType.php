@@ -49,10 +49,7 @@ class assignmentType {
 // **********************
     function select($id) {
         $sql = "SELECT * FROM assignmenttype WHERE ID = $id;";
-        $success = $this->database->query($sql);
-        $result = $this->database->result;
-        $row = mysql_fetch_object($result);
-
+        $this->database->query($sql);        $row = $this->database->getResultObject();
         $this->ID = $row->ID;
         $this->name = $row->name;
         $this->hasbepoint = $row->hasbepoint;
@@ -65,7 +62,7 @@ class assignmentType {
 // **********************
     function delete($id) {
         $sql = "DELETE FROM assignmenttype WHERE ID = $id;";
-        $result = $this->database->query($sql);
+        $this->database->query($sql);
     }
 
 // **********************
@@ -75,8 +72,8 @@ class assignmentType {
         $this->ID = ""; // clear key for autoincrement
 
         $sql = "INSERT INTO assignmenttype ( name,hasbepoint,hasdetails,color ) VALUES ( '$this->name','$this->hasbepoint','$this->hasdetails','$this->color' )";
-        $result = $this->database->query($sql);
-        $this->ID = mysql_insert_id($this->database->link);
+        $this->database->query($sql);
+        $this->ID = $this->database->getInsertedId();
     }
 
 // **********************
@@ -84,7 +81,7 @@ class assignmentType {
 // **********************
     function update($id) {
         $sql = " UPDATE assignmenttype SET  name = '$this->name',hasbepoint = '$this->hasbepoint', hasdetails = '$this->hasdetails', color = '$this->color' WHERE ID = $id ";
-        $result = $this->database->query($sql);
+        $this->database->query($sql);
     }
 }
 ?>

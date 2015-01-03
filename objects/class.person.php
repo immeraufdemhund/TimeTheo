@@ -39,10 +39,8 @@ class person {
 // **********************
     function select($id) {
         $sql = "SELECT * FROM person WHERE ID = $id;";
-        $success = $this->database->query($sql);
-        $result = $this->database->result;
-        $row = mysql_fetch_object($result);
-
+        $this->database->query($sql);
+        $row = $this->database->getResultObject();
         $this->ID = $row->ID;
         $this->Name = $row->Name;
         $this->Active = $row->Active;
@@ -53,7 +51,7 @@ class person {
 // **********************
     function delete($id) {
         $sql = "DELETE FROM person WHERE ID = $id;";
-        return $this->database->query($sql);
+        $this->database->query($sql);
     }
 
 // **********************
@@ -62,9 +60,9 @@ class person {
     function insert() {
         $this->ID = ""; // clear key for autoincrement
         $sql = "INSERT INTO person ( Name,Active ) VALUES ( '$this->Name','$this->Active' )";
-        $result = $this->database->query($sql);
-        $this->ID = mysql_insert_id($this->database->link);
-        return $result;
+        $this->database->query($sql);
+        $this->ID = $this->database->getInsertedId();
+        
     }
 
 // **********************
@@ -72,7 +70,7 @@ class person {
 // **********************
     function update($id) {
         $sql = " UPDATE person SET  Name = '$this->Name',Active = '$this->Active' WHERE ID = $id ";
-        return $this->database->query($sql);
+        $this->database->query($sql);
     }
 	
 	public function __toString(){

@@ -40,10 +40,7 @@ class meetingType {
     function select($id) {
 
         $sql = "SELECT * FROM meetingtype WHERE ID = $id;";
-        $success = $this->database->query($sql);
-        $result = $this->database->result;
-        $row = mysql_fetch_object($result);
-
+        $this->database->query($sql);        $row = $this->database->getResultObject();
         $this->ID = $row->ID;
         $this->name = $row->name;
         $this->offset = $row->offset;
@@ -54,7 +51,7 @@ class meetingType {
 // **********************
     function delete($id) {
         $sql = "DELETE FROM meetingtype WHERE ID = $id;";
-        return $this->database->query($sql);
+        $this->database->query($sql);
     }
 
 // **********************
@@ -63,9 +60,9 @@ class meetingType {
     function insert() {
         $this->ID = ""; // clear key for autoincrement
         $sql = "INSERT INTO meetingtype ( name,offset ) VALUES ( '$this->name','$this->offset' )";
-        $result = $this->database->query($sql);
-        $this->ID = mysql_insert_id($this->database->link);
-        return $result;
+        $this->database->query($sql);
+        $this->ID = $this->database->getInsertedId();
+        
     }
 
 // **********************
@@ -73,7 +70,7 @@ class meetingType {
 // **********************
     function update($id) {
         $sql = " UPDATE meetingtype SET  name = '$this->name',offset = '$this->offset' WHERE ID = $id ";
-        return $this->database->query($sql);
+        $this->database->query($sql);
     }
 
 }

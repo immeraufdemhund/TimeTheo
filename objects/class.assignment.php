@@ -42,10 +42,7 @@ class assignment {
 // **********************
     function select($id) {
         $sql = "SELECT * FROM assignment WHERE ID = $id;";
-        $success = $this->database->query($sql);
-        $result = $this->database->result;
-        $row = mysql_fetch_object($result);
-
+        $this->database->query($sql);        $row = $this->database->getResultObject();
         $this->ID = $row->ID;
         $this->meetingID = $row->meetingID;
         $this->personId = $row->personId;
@@ -57,7 +54,7 @@ class assignment {
 // **********************
     function delete($id) {
         $sql = "DELETE FROM assignment WHERE ID = $id;";
-        $result = $this->database->query($sql);
+        $this->database->query($sql);
     }
 
 // **********************
@@ -67,8 +64,8 @@ class assignment {
         $this->ID = ""; // clear key for autoincrement
 
         $sql = "INSERT INTO assignment ( meetingID,personId,assignmentTypeId ) VALUES ( '$this->meetingID','$this->personId','$this->assignmentTypeId' )";
-        $result = $this->database->query($sql);
-        $this->ID = mysql_insert_id($this->database->link);
+        $this->database->query($sql);
+        $this->ID = $this->database->getInsertedId();
     }
 
 // **********************
@@ -76,7 +73,7 @@ class assignment {
 // **********************
     function update($id) {
         $sql = " UPDATE assignment SET  meetingID = '$this->meetingID',personId = '$this->personId', assignmentTypeId = '$this->assignmentTypeId' WHERE ID = $id ";
-        $result = $this->database->query($sql);
+        $this->database->query($sql);
     }
 }
 ?>
