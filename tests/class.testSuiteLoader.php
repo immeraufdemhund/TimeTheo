@@ -11,20 +11,19 @@ class testSuiteLoader {
 
     /*
      * Gets a list of Test Suites
-     * @return testSuite[]
+     * @return phpTestSuite[]
      */
 
     public function getTestSuites() {
         $this->getClassesFromDirectory($this->classesDirectory);
         $testSuites = array();
         foreach ($this->classesToCheck as $className) {
-            $tempObject = new $className;
-            if(is_subclass_of($tempObject, "testSuite")){
-                
-                array_push($testSuites, $tempObject);
+            $tempObject = new $className();
+            if(is_subclass_of($tempObject, "phpTestSuite")){
+                $testSuites[$className] = $this->selectTestSuiteMethods($tempObject);
             }
             else{
-                throw new Exception("You silly person");
+                //throw new Exception("You silly person");
             }
         }
         return $testSuites;

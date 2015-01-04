@@ -1,6 +1,10 @@
 <?php
-class userTest extends testSuite {
-
+class userTest extends phpTestSuite {
+    
+    public function userTest(){
+        parent::phpTestSuite("userTest");
+    }
+    
     function testValidLogin() {
         $user = new user();
         $user->setUserName("pwrinkle");

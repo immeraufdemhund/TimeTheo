@@ -5,7 +5,7 @@
  * that are tested
  */
 
-abstract class testSuite {
+abstract class phpTestSuite {
 
     public function RunTestSuite() {
         try {
@@ -15,7 +15,7 @@ abstract class testSuite {
             $this->tryTestTearDown();
         }
     }
-    public function testSuite($className){
+    public function phpTestSuite($className){
         
     }
     private function RunAllTestMethods() {
