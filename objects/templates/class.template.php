@@ -5,11 +5,11 @@ class Template {
     public static function load(configFile $config, $classInstance) {
         $uri = sprintf("themes/%s/view.%s.html", self::getProperTheme($config), get_class($classInstance));
         if (!file_exists($uri)) {
-            $uri = "../" + $uri;
+            $uri = "../" . $uri;
             if (!file_exists($uri)) {
-                $uri = "../" + $uri;
+                $uri = "../" . $uri;
                 if (!file_exists($uri)) {
-                    $uri = "../" + $uri;
+                    $uri = "../" . $uri;
                 }
             }
         }

@@ -1,4 +1,5 @@
 <?php
+
 class meetingType {
 
     var $ID;   // KEY ATTR. WITH AUTOINCREMENT
@@ -9,7 +10,7 @@ class meetingType {
     function meetingType() {
         $this->database = new Database();
     }
-	
+
     function getID() {
         return $this->ID;
     }
@@ -47,6 +48,11 @@ class meetingType {
         $this->ID = $row->ID;
         $this->name = $row->name;
         $this->offset = $row->offset;
+        if ($this->database->rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 // **********************

@@ -1,6 +1,5 @@
 <?php
-
-class userTest {
+class userTest extends testSuite {
 
     function testValidLogin() {
         $user = new user();

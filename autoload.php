@@ -6,7 +6,8 @@ function __autoload($class_name) {
         'objects/',
         'objects/templates/',
         'conn/',
-        'testClasses/'
+        'testClasses/',
+        'tests/'
     );
 
     $direction = "";

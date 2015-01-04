@@ -55,7 +55,7 @@ if (isset($_REQUEST['setupSubmit']) && $_REQUEST['setupSubmit']) {
         $data->Query("DROP TABLE IF EXISTS `assignmentdetails`;");
         $data->Query("Create TABLE `assignmentdetails` (	`assignmentID` int(11) NOT NULL,	`details` text);");
         $data->Query("DROP TABLE IF EXISTS `bepoints`;");
-        $data->Query("Create TABLE `bepoints` (  `PersonId` int(11) NOT NULL,  `assignmentTypeId` int(11) NOT NULL,  `pointNumber` int(3) NOT NULL,  `completeDate` int(11) NOT NULL,  `notes` text);");
+        $data->Query("Create TABLE `bepoints` (  `ID` int(11) NOT NULL AUTO_INCREMENT, `PersonId` int(11) NOT NULL,  `assignmentTypeId` int(11) NOT NULL,  `pointNumber` int(3) NOT NULL,  `completeDate` int(11) NOT NULL,  `notes` text, PRIMARY KEY (`ID`));");
         $data->Query("DROP TABLE IF EXISTS `meeting`;");
         $data->Query("Create TABLE `meeting` (  `ID` int(11) NOT NULL AUTO_INCREMENT,  `meetingTypeId` int(11) NOT NULL,  `weekNumber` int(11) NOT NULL,  `year` int(11) NOT NULL,  PRIMARY KEY (`ID`));");
         $data->Query("DROP TABLE IF EXISTS `meetingtype`;");
