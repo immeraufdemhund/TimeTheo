@@ -18,6 +18,10 @@ class Database {
         $this->config = $config;
     }
 
+    function getConfig(){
+        return $this->config;
+    }
+
     function OpenLink() {
         if (!$this->link = @mysql_connect($this->config->getHost(), $this->config->getUser(), $this->config->getPassword())) {
             throw new exception("Class Database: Error while connecting to DB (link)");

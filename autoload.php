@@ -12,7 +12,7 @@ function __autoload($class_name) {
 
     $direction = "";
 
-    if (basename(dirname($_SERVER['PHP_SELF'])) == "tests" || basename(dirname($_SERVER['PHP_SELF'])) == "setup") {
+    if (basename(dirname($_SERVER['PHP_SELF'])) == "tests" || basename(dirname($_SERVER['PHP_SELF'])) == "setup" || basename(dirname($_SERVER['PHP_SELF'])) == "assigntypes") {
         $direction = "../";
     }
 

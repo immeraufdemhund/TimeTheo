@@ -2,7 +2,7 @@
 
 class Template {
 
-    public static function load(configFile $config, $classInstance) {
+    public static function load(configFile $config, $classInstance, $returnValues = false) {
         $uri = sprintf("themes/%s/view.%s.html", self::getProperTheme($config), get_class($classInstance));
         if (!file_exists($uri)) {
             $uri = "../" . $uri;
@@ -14,6 +14,9 @@ class Template {
             }
         }
         $template = self::replace($classInstance, file_get_contents($uri));
+        if ($returnValues) {
+            return $template;
+        }
         echo($template);
     }
 
