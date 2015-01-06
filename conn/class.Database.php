@@ -2,11 +2,11 @@
 
 class Database {
 
-    var $link;
-    var $query;
-    var $result;
-    var $rows;
-    var $config;
+    private $link;
+    private $query;
+    private $result;
+    private $rows;
+    private $config;
 
     function Database() {
         $this->config = new configFile();

@@ -1,7 +1,7 @@
 <?php
 class editAssignmentType extends assignmentType{
 
-	private new;
+	private $new;
 
 	public function editAssinmentType(){
 

@@ -34,7 +34,9 @@ class user {
     }
 
     function setPassword($val) {
-        $this->Password = $this->saltAndMD5Text($val);
+        //password hash salts and encrypts password automagically.
+        //size is between 60 and 72 characters. (PASSWORD_BCRYPT supposedly makes it always 60 characters)
+        $this->Password = password_hash($val, PASSWORD_BCRYPT);
     }
 
     function setPersonID($val) {
@@ -51,7 +53,7 @@ class user {
     function select($id) {
 
         $sql = "SELECT * FROM user WHERE ID = $id;";
-        $success = $this->database->query($sql);
+        $this->database->query($sql);
         $result = $this->database->result;
         $row = mysql_fetch_object($result);
 
@@ -99,16 +101,15 @@ class user {
 
     function tryLogin() {
         $sql = "SELECT Password, ID FROM user WHERE UserName = '$this->UserName'";
-        $success = $this->database->query($sql);
+        $this->database->query($sql);
         $result = $this->database->result;
         $row = mysql_fetch_object($result);
-        if ($this->database->rows > 0) {
-            if ($this->Password == $row->Password) {
-                $this->select($row->ID);
-                return $this->ID;
-            } else {
-                return false;
-            }
+        if ($this->database->rows < 1) {
+            return false;
+        }
+        if (password_verify($this-Password, $row->Password)) {
+            $this->select($row->ID);
+            return $this->ID;
         } else {
             return false;
         }
